@@ -134,14 +134,14 @@ const UserRequest = ({ request, handleFetchingUserRequest }) => {
                                     <input type="text" id="source" name="source" placeholder="Source" onChange={handleChange}/>
                                     <fieldset id="show-type">
                                         <legend>Show Type</legend>
-                                        <label><input type="checkbox" name="show-type" value="TV" onChange={handleChange}/> TV</label>
-                                        <label><input type="checkbox" name="show-type" value="OVA" onChange={handleChange}/> OVA</label>
-                                        <label><input type="checkbox" name="show-type" value="Movie" onChange={handleChange} /> Movie</label>
-                                        <label><input type="checkbox" name="show-type" value="ONA" onChange={handleChange} /> ONA</label>
-                                        <label><input type="checkbox" name="show-type" value="TV Special" onChange={handleChange} /> TV Special</label>
-                                        <label><input type="checkbox" name="show-type" value="Special" onChange={handleChange} /> Special</label>
-                                        <label><input type="checkbox" name="show-type" value="PV" onChange={handleChange} /> PV</label>
-                                        <label><input type="checkbox" name="show-type" value="CM" onChange={handleChange} /> CM</label>
+                                        <label><input type="checkbox" name="showType" value="TV" onChange={handleChange}/> TV</label>
+                                        <label><input type="checkbox" name="showType" value="OVA" onChange={handleChange}/> OVA</label>
+                                        <label><input type="checkbox" name="showType" value="Movie" onChange={handleChange} /> Movie</label>
+                                        <label><input type="checkbox" name="showType" value="ONA" onChange={handleChange} /> ONA</label>
+                                        <label><input type="checkbox" name="showType" value="TV Special" onChange={handleChange} /> TV Special</label>
+                                        <label><input type="checkbox" name="showType" value="Special" onChange={handleChange} /> Special</label>
+                                        <label><input type="checkbox" name="showType" value="PV" onChange={handleChange} /> PV</label>
+                                        <label><input type="checkbox" name="showType" value="CM" onChange={handleChange} /> CM</label>
                                     </fieldset>
                                     <input type="text" id="language" name="language" placeholder="Language" onChange={handleChange} />
                                     <input type="url" id="topImage" name="topImage" placeholder="Top Image URL" onChange={handleChange} />

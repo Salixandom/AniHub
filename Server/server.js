@@ -589,7 +589,7 @@ app.get('/home/getNewAdded', async (req, res) => {
             `SELECT *
                 FROM anime_table
                 WHERE rated <> 'Rx - Hentai'
-                ORDER BY added_date DESC, average_rating DESC, favorites DESC 
+                ORDER BY added_date, average_rating DESC, favorites DESC 
                 LIMIT 5`
         )
         const newRelease = result.rows;
@@ -3821,7 +3821,7 @@ app.get('/admin/requests', async (req, res) => {
     try {
         const result = await pool.query(
             `SELECT ar.*, TO_CHAR(ar.created_at, 'Mon DD, YYYY') AS req_date, u.display_name, i.url FROM anime_requests ar
-            JOIN user_table u ON ar.user_id = u.user_id
+            LEFT JOIN user_table u ON ar.user_id = u.user_id
             LEFT JOIN images i ON u.image_id = i.id`
         )
 
@@ -3865,12 +3865,15 @@ app.post('/request/delete', async (req, res) => {
 
 
 app.post('/anime/add', async (req, res) => {
-    const { title, releaseDate, description, coverImage, ongoingStatus, runTime, airingSeason, source, showType, language, topImage, episodeNo, rated, trailer, genres, requestID } = req.body;
+    const { title, releaseDate, description, coverImage, ongoingStatus, runTime, airingSeason, source, showType, language, topImage, episodeNo, rated, trailer, genres } = req.body.animeFormData;
+    const { requestID } = req.body;
 
+    console.log(showType, title)
     try {
         const result = await pool.query('CALL add_anime($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17)',
             [title, releaseDate, description, coverImage, ongoingStatus, runTime, airingSeason, source, showType.join(','), language, topImage, parseInt(episodeNo), rated, genres, title, trailer, new Date()]); 
 
+        console.log('ashe')
         const result2 = await pool.query(
             `DELETE FROM anime_requests WHERE request_id = $1`, [requestID]
         )

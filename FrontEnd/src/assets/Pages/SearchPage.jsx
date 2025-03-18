@@ -22,7 +22,7 @@ const SearchPage = () => {
 
     const yearsArray = Array.from({ length: 2025 - 1917 + 1 }, (_, index) => (1917 + index).toString());
     const formatsArray = ['TV', 'Movie', 'OVA', 'ONA', 'TV Special', 'Special', 'Music', 'PV', 'CM']
-    const ratingArray = ['G', 'PG-13', 'PG', 'R-17+', 'R+']
+    const ratingArray = ['G', 'PG-13', 'PG', 'R-17+', 'R+', 'Rx']
 
 
     const [result, setResult] = useState([]);
