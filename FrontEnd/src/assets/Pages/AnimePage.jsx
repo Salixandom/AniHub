@@ -16,6 +16,9 @@ import './../CSS/style.css'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { BASE_URL } from '../../config';
+import producer from './../../../public/producer.jpg';
+import licensor from './../../../public/licensor.jpg';
+import studio from './../../../public/studio.jpg';
 
 
 const AnimePage = () => {
@@ -1006,10 +1009,10 @@ const AnimePage = () => {
                                         <img key={index}
                                             src={
                                                 (pr.type === 'producer') ?
-                                                    './../../../public/producer.jpg' :
+                                                    producer :
                                                     (pr.type === 'licensor' ?
-                                                        './../../../public/licensor.jpg' :
-                                                        './../../../public/studio.jpg')
+                                                        licensor :
+                                                        studio)
                                             }
                                             alt='Production'
                                             className='staff-image'
@@ -1348,10 +1351,10 @@ const AnimePage = () => {
                                         <img key={index}
                                             src={
                                                 (pr.type === 'producer') ?
-                                                    './../../../public/producer.jpg' :
+                                                    producer :
                                                     (pr.type === 'licensor' ?
-                                                        './../../../public/licensor.jpg' :
-                                                        './../../../public/studio.jpg')
+                                                        licensor :
+                                                        studio)
                                             }
                                             alt='Production'
                                             className='staff-image'

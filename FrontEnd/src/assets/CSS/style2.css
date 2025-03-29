@@ -34,7 +34,7 @@ header {
   position: relative;
   width: 60px;
   height: 60px;
-  background: url(https://i.ibb.co/HrfVRcx/menu.png);
+  background: url(https//img.icons8.com/?size=100&id=0hHvb4pS3tau&format=png&color=000000);
   background-repeat: no-repeat;
   background-size: 30px;
   background-position: center;
@@ -230,7 +230,6 @@ header {
 
 /* Additional styles for dropdown */
 .dropdown {
-  display: none;
   position: absolute;
   /* background-color: rgba(255, 255, 255, 0); */
   background-color: transparent;
@@ -268,4 +267,19 @@ header {
   /* existing styles */
   z-index: 1001;
   /* Make sure toggle is above dropdown */
+}
+
+.toggle-icon {
+  display: inline-block;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.fade-in-bar {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+.fade-out-bar {
+  opacity: 1;
+  transform: rotate(180deg) scale(1.2);
 }
