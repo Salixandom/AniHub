@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import './CSS/profile.css'
 import './CSS/style.css'
+import { BASE_URL } from '../config';
 
 const Notifications = ({ notification, handleFetchingNotification }) => {
     const { user } = useSelector((state) => state.auth);
@@ -18,7 +19,7 @@ const Notifications = ({ notification, handleFetchingNotification }) => {
 
     useEffect(() => {
         if (notification.type === 'Promoted' || notification.type === 'Demoted' || notification.type === 'warning') {
-            axios.get('http://localhost:5000/notifications/admin-info')
+            axios.get(`${BASE_URL}/notifications/admin-info`)
                 .then((response) => {
                     setAdminInfo(response.data)
                 })
@@ -26,7 +27,7 @@ const Notifications = ({ notification, handleFetchingNotification }) => {
                     console.error('Error fetching admin info: ', error);
                 })
         } else if (notification.type === 'upvote' || notification.type === 'downvote') {
-            axios.get(`http://localhost:5000/notifications/user-info/${notification.trigger_user_id}`)
+            axios.get(`${BASE_URL}/notifications/user-info/${notification.trigger_user_id}`)
                 .then((response) => {
                     setUserInfo(response.data)
                 })
@@ -35,7 +36,7 @@ const Notifications = ({ notification, handleFetchingNotification }) => {
                 });
 
             if (notification.entity_type === 'comment') {
-                axios.get(`http://localhost:5000/notifications/comment-upvote-downvote/${notification.entity_id}`)
+                axios.get(`${BASE_URL}/notifications/comment-upvote-downvote/${notification.entity_id}`)
                     .then((response) => {
                         setNotificationComment(response.data)
                     })
@@ -43,7 +44,7 @@ const Notifications = ({ notification, handleFetchingNotification }) => {
                         console.error('Error fetching comment upvote/downvote: ', error);
                     })
             } else if (notification.entity_type === 'review') {
-                axios.get(`http://localhost:5000/notifications/review-upvote-downvote/${notification.entity_id}`)
+                axios.get(`${BASE_URL}/notifications/review-upvote-downvote/${notification.entity_id}`)
                     .then((response) => {
                         setNotificationReview(response.data)
                     })
@@ -51,7 +52,7 @@ const Notifications = ({ notification, handleFetchingNotification }) => {
                         console.error('Error fetching review upvote/downvote: ', error);
                     })
             } else if (notification.entity_type === 'reply') {
-                axios.get(`http://localhost:5000/notifications/reply-upvote-downvote/${notification.entity_id}`)
+                axios.get(`${BASE_URL}/notifications/reply-upvote-downvote/${notification.entity_id}`)
                     .then((response) => {
                         setNotificationReply(response.data)
                     })
@@ -59,7 +60,7 @@ const Notifications = ({ notification, handleFetchingNotification }) => {
                         console.error('Error fetching reply upvote/downvote: ', error);
                     })
             } else if (notification.entity_type === 'forum_reply') {
-                axios.get(`http://localhost:5000/notifications/forumReply-upvote-downvote/${notification.entity_id}`)
+                axios.get(`${BASE_URL}/notifications/forumReply-upvote-downvote/${notification.entity_id}`)
                     .then((response) => {
                         setNotificationForumReply(response.data)
                     })
@@ -68,7 +69,7 @@ const Notifications = ({ notification, handleFetchingNotification }) => {
                     })
             }
         } else if (notification.type === 'reply_comment') {
-            axios.get(`http://localhost:5000/notifications/user-info/${notification.trigger_user_id}`)
+            axios.get(`${BASE_URL}/notifications/user-info/${notification.trigger_user_id}`)
                 .then((response) => {
                     setUserInfo(response.data)
                 })
@@ -76,7 +77,7 @@ const Notifications = ({ notification, handleFetchingNotification }) => {
                     console.error('Error fetching user info: ', error);
                 });
 
-            axios.get(`http://localhost:5000/notifications/comment-upvote-downvote/${notification.entity_id}`)
+            axios.get(`${BASE_URL}/notifications/comment-upvote-downvote/${notification.entity_id}`)
                 .then((response) => {
                     setNotificationComment(response.data)
                 })
@@ -84,7 +85,7 @@ const Notifications = ({ notification, handleFetchingNotification }) => {
                     console.error('Error fetching comment upvote/downvote: ', error);
                 })
         } else if (notification.type === 'reply_forum') {
-            axios.get(`http://localhost:5000/notifications/user-info/${notification.trigger_user_id}`)
+            axios.get(`${BASE_URL}/notifications/user-info/${notification.trigger_user_id}`)
                 .then((response) => {
                     setUserInfo(response.data)
                 })
@@ -92,7 +93,7 @@ const Notifications = ({ notification, handleFetchingNotification }) => {
                     console.error('Error fetching user info: ', error);
                 });
 
-            axios.get(`http://localhost:5000/notifications/forum/${notification.entity_id}`)
+            axios.get(`${BASE_URL}/notifications/forum/${notification.entity_id}`)
                 .then((response) => {
                     setNotificationForum(response.data)
                 })
@@ -105,7 +106,7 @@ const Notifications = ({ notification, handleFetchingNotification }) => {
 
 
     const handleSeen = () => {
-        axios.post(`http://localhost:5000/notifications/set-seen`, {
+        axios.post(`${BASE_URL}/notifications/set-seen`, {
             notificationID: notification.notification_id
         })
             .then((response) => {

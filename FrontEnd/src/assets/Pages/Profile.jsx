@@ -17,6 +17,7 @@ import LogTable from '../LogTable';
 import Notifications from '../Notification';
 import Reports from '../Reports';
 import UserRequest from '../UserRequest';
+import { BASE_URL } from '../../config';
 
 const Profile = () => {
 
@@ -95,7 +96,7 @@ const Profile = () => {
             })
 
             console.log(user)
-            axios.get(`http://localhost:5000/user/profile/watchList/${user.user_id}`)
+            axios.get(`${BASE_URL}/user/profile/watchList/${user.user_id}`)
                 .then((response) => {
                     setWatchList(response.data);
                 })
@@ -104,7 +105,7 @@ const Profile = () => {
                 });
 
 
-            axios.get(`http://localhost:5000/user/profile/favoriteList/${user.user_id}`)
+            axios.get(`${BASE_URL}/user/profile/favoriteList/${user.user_id}`)
                 .then((response) => {
                     setFavoriteList(response.data);
                 })
@@ -112,7 +113,7 @@ const Profile = () => {
                     console.error('Error fetching favorites: ', error);
                 });
 
-            axios.get(`http://localhost:5000/user/${user.user_id}/interaction-per-day`)
+            axios.get(`${BASE_URL}/user/${user.user_id}/interaction-per-day`)
                 .then((response) => {
                     setInteractionPerDate(response.data);
                 })
@@ -120,7 +121,7 @@ const Profile = () => {
                     console.error('Error fetching anime interaction per date data: ', error);
                 })
 
-            axios.get(`http://localhost:5000/user/${user.user_id}/statusSegment`)
+            axios.get(`${BASE_URL}/user/${user.user_id}/statusSegment`)
                 .then((response) => {
                     setStatusSegment({
                         planning: response.data.planning,
@@ -134,7 +135,7 @@ const Profile = () => {
                     console.error('Error fetching segment data: ', error);
                 })
 
-            axios.get(`http://localhost:5000/user/${user.user_id}/scoreGraph`)
+            axios.get(`${BASE_URL}/user/${user.user_id}/scoreGraph`)
                 .then((response) => {
                     setScoreData({
                         rating_1: response.data.rating_1,
@@ -154,7 +155,7 @@ const Profile = () => {
                 })
 
 
-            axios.get(`http://localhost:5000/user-profile/forums/${user.user_id}`)
+            axios.get(`${BASE_URL}/user-profile/forums/${user.user_id}`)
                 .then((response) => {
                     setUserForums(response.data);
                 })
@@ -162,7 +163,7 @@ const Profile = () => {
                     console.error('Error fetching forums: ', error);
                 })
 
-            axios.get(`http://localhost:5000/user-profile/reviews/${user.user_id}`)
+            axios.get(`${BASE_URL}/user-profile/reviews/${user.user_id}`)
                 .then((response) => {
                     setUserReviews(response.data);
                 })
@@ -171,7 +172,7 @@ const Profile = () => {
                 })
         }
 
-        axios.get('http://localhost:5000/profile/select-avatar')
+        axios.get(`${BASE_URL}/profile/select-avatar`)
             .then((response) => {
                 setImages(response.data);
             })
@@ -179,7 +180,7 @@ const Profile = () => {
                 console.error('Error fetching avatars: ', error);
             });
 
-        axios.get(`http://localhost:5000/user/genrePreference`)
+        axios.get(`${BASE_URL}/user/genrePreference`)
             .then((response) => {
                 setGenrePreference(response.data);
             })
@@ -187,7 +188,7 @@ const Profile = () => {
                 console.error('Error fetching genre preferences: ', error);
             })
 
-        axios.get(`http://localhost:5000/userActivity`)
+        axios.get(`${BASE_URL}/userActivity`)
             .then((response) => {
                 setUserActivity(response.data);
             })
@@ -195,7 +196,7 @@ const Profile = () => {
                 console.error('Error fetching user activity: ', error);
             })
 
-        axios.get(`http://localhost:5000/userAnimeInteraction`)
+        axios.get(`${BASE_URL}/userAnimeInteraction`)
             .then((response) => {
                 setUserAnimeInteractions(response.data);
             })
@@ -219,7 +220,7 @@ const Profile = () => {
     };
 
     const handleFetchingReports = () => {
-        axios.get(`http://localhost:5000/admin/reports/${user.user_id}`)
+        axios.get(`${BASE_URL}/admin/reports/${user.user_id}`)
             .then((response) => {
                 setReports(response.data);
             })
@@ -229,12 +230,12 @@ const Profile = () => {
     }
 
     const handleFetchingRequest = () => {
-        axios.get(`http://localhost:5000/admin/requests`)
-          .then((response) => {
+        axios.get(`${BASE_URL}/admin/requests`)
+            .then((response) => {
                 console.log(response.data)
                 setUserRequests(response.data);
             })
-          .catch((error) => {
+            .catch((error) => {
                 console.error('Error fetching requests: ', error);
             })
     }
@@ -247,7 +248,7 @@ const Profile = () => {
             formData.append('avatar', file);
 
             try {
-                const response = await axios.post(`http://localhost:5000/profile/upload-avatar/${user.user_id}`, formData, {
+                const response = await axios.post(`${BASE_URL}/profile/upload-avatar/${user.user_id}`, formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                     }
@@ -297,7 +298,7 @@ const Profile = () => {
 
     const handleSave = async () => {
         try {
-            const response = await axios.post('http://localhost:5000/profile/update', {
+            const response = await axios.post(`${BASE_URL}/profile/update`, {
                 first_name: formValues.firstName,
                 last_name: formValues.lastName,
                 display_name: formValues.displayName,
@@ -338,7 +339,7 @@ const Profile = () => {
     const handleImageSelect = async (image) => {
 
         try {
-            axios.post('http://localhost:5000/profile/set-avatar', {
+            axios.post(`${BASE_URL}/profile/set-avatar`, {
                 user_id: user.user_id,
                 image_id: image.id,
                 image_url: image.url,
@@ -368,7 +369,7 @@ const Profile = () => {
     }
 
     const handleLogout = () => {
-        axios.post(`http://localhost:5000/user/logOut`, {
+        axios.post(`${BASE_URL}/user/logOut`, {
             userID: user.user_id
         })
             .then((response) => {
@@ -391,7 +392,7 @@ const Profile = () => {
 
     const handleChangePassword = async () => {
         try {
-            const response = await axios.post('http://localhost:5000/profile/change-pass', {
+            const response = await axios.post(`${BASE_URL}/profile/change-pass`, {
                 user_id: user.user_id,
                 new_password: formValues.password,
                 confirmPassword,
@@ -430,7 +431,7 @@ const Profile = () => {
     }
 
     const handleFetchingNotification = () => {
-        axios.get(`http://localhost:5000/user/${user.user_id}/notificationID`)
+        axios.get(`${BASE_URL}/user/${user.user_id}/notificationID`)
             .then((response) => {
                 setNotifications(response.data);
             })
@@ -440,7 +441,7 @@ const Profile = () => {
     }
 
     const handleFetchingWarning = () => {
-        axios.get(`http://localhost:5000/user/${user.user_id}/warnings`)
+        axios.get(`${BASE_URL}/user/${user.user_id}/warnings`)
             .then((response) => {
                 console.log(response.data)
                 setWarnings(response.data);
@@ -455,7 +456,7 @@ const Profile = () => {
     }
 
     const handleDeleteAccount = () => {
-        axios.post(`http://localhost:5000/user/delete`, {
+        axios.post(`${BASE_URL}/user/delete`, {
             userID: user.user_id
         })
             .then((response) => {
@@ -469,7 +470,7 @@ const Profile = () => {
     }
 
     const handleVacation = () => {
-        axios.post(`http://localhost:5000/go-on-a-vacation`, {
+        axios.post(`${BASE_URL}/go-on-a-vacation`, {
             userID: user.user_id
         })
             .then((response) => {

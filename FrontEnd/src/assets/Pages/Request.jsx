@@ -6,6 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Navigation, Footer } from './imports';
 import './../CSS/request.css';
+import { BASE_URL } from '../../config';
 
 const Request = () => {
     const { user } = useSelector((state) => state.auth);
@@ -43,10 +44,10 @@ const Request = () => {
     };
 
     const handleSubmit = async (e) => {
-        if(user) {
+        if (user) {
             e.preventDefault();
             console.log(formData)
-            axios.post('http://localhost:5000/user-request', {
+            axios.post(`${BASE_URL}/user-request`, {
                 formData: formData,
                 userID: user.user_id
             })

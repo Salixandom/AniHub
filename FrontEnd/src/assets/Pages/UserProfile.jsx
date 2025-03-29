@@ -11,6 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import UserActivity from '../UserActivity';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { BASE_URL } from '../../config';
 
 const UserProfile = () => {
     let { userID } = useParams();
@@ -38,7 +39,7 @@ const UserProfile = () => {
     const [isBanOpen, setIsBanOpen] = useState(false);
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/user-profile/${userID}`)
+        axios.get(`${BASE_URL}/user-profile/${userID}`)
             .then((response) => {
                 setUserProfile(response.data);
             })
@@ -46,7 +47,7 @@ const UserProfile = () => {
                 console.error('Error fetching user profile: ', error);
             })
 
-        axios.get(`http://localhost:5000/user/${userID}/statusSegment`)
+        axios.get(`${BASE_URL}/user/${userID}/statusSegment`)
             .then((response) => {
                 setStatusSegment({
                     planning: response.data.planning,
@@ -60,7 +61,7 @@ const UserProfile = () => {
                 console.error('Error fetching segment data: ', error);
             })
 
-        axios.get(`http://localhost:5000/user/profile/favoriteList/${userID}`)
+        axios.get(`${BASE_URL}/user/profile/favoriteList/${userID}`)
             .then((response) => {
                 setFavoriteList(response.data);
             })
@@ -68,7 +69,7 @@ const UserProfile = () => {
                 console.error('Error fetching favorites: ', error);
             });
 
-        axios.get(`http://localhost:5000/user-profile/${userID}/latestInteractions`)
+        axios.get(`${BASE_URL}/user-profile/${userID}/latestInteractions`)
             .then((response) => {
                 setLatestInteractions(response.data);
             })
@@ -76,7 +77,7 @@ const UserProfile = () => {
                 console.error('Error fetching latest interactions: ', error);
             });
 
-        axios.get(`http://localhost:5000/user-profile/${userID}/avgScore`)
+        axios.get(`${BASE_URL}/user-profile/${userID}/avgScore`)
             .then((response) => {
                 setAvgScore(response.data.avgscore);
             })
@@ -84,7 +85,7 @@ const UserProfile = () => {
                 console.error('Error fetching average score: ', error);
             });
 
-        axios.get(`http://localhost:5000/user-profile/${userID}/totalReplies`)
+        axios.get(`${BASE_URL}/user-profile/${userID}/totalReplies`)
             .then((response) => {
                 setTotalReplies(response.data);
             })
@@ -92,7 +93,7 @@ const UserProfile = () => {
                 console.error('Error fetching total replies: ', error);
             });
 
-        axios.get(`http://localhost:5000/user-profile/${userID}/lastActive`)
+        axios.get(`${BASE_URL}/user-profile/${userID}/lastActive`)
             .then((response) => {
                 setLastActive(response.data);
             })
@@ -100,7 +101,7 @@ const UserProfile = () => {
                 console.error('Error fetching last active: ', error);
             })
 
-        axios.get(`http://localhost:5000/user-profile/${userID}/userActivity`)
+        axios.get(`${BASE_URL}/user-profile/${userID}/userActivity`)
             .then((response) => {
                 setUserActivity(response.data);
             })
@@ -112,7 +113,7 @@ const UserProfile = () => {
     }, [hasChanged])
 
     const fetchUserProfile = () => {
-        axios.get(`http://localhost:5000/user-profile/${userID}`)
+        axios.get(`${BASE_URL}/user-profile/${userID}`)
             .then((response) => {
                 setUserProfile(response.data);
             })
@@ -129,7 +130,7 @@ const UserProfile = () => {
         if (reportContent === "") {
             alert("Report content cannot be empty")
         } else {
-            axios.post(`http://localhost:5000/user/report`, {
+            axios.post(`${BASE_URL}/user/report`, {
                 reported_user_id: userProfile.user_id,
                 reporting_user_id: user.user_id,
                 reason: reportContent
@@ -145,7 +146,7 @@ const UserProfile = () => {
     }
 
     const handlePromotion = () => {
-        axios.post(`http://localhost:5000/userProfile/promotion-demotion`, {
+        axios.post(`${BASE_URL}/userProfile/promotion-demotion`, {
             adminID: user.user_id,
             userID: userProfile.user_id,
             type: "Moderator"
@@ -162,7 +163,7 @@ const UserProfile = () => {
     }
 
     const handleDemotion = () => {
-        axios.post(`http://localhost:5000/userProfile/promotion-demotion`, {
+        axios.post(`${BASE_URL}/userProfile/promotion-demotion`, {
             adminID: user.user_id,
             userID: userProfile.user_id,
             type: "Member"
@@ -179,7 +180,7 @@ const UserProfile = () => {
     }
 
     const handleDeleteAccount = () => {
-        axios.post(`http://localhost:5000/user/delete`, {
+        axios.post(`${BASE_URL}/user/delete`, {
             userID: userProfile.user_id,
         })
             .then((response) => {
@@ -195,7 +196,7 @@ const UserProfile = () => {
     const handleBan = () => {
         console.log(new Date());
         console.log(startDate)
-        axios.post('http://localhost:5000/userProfile/ban', {
+        axios.post(`${BASE_URL}/userProfile/ban`, {
             banUntil: startDate,
             userID: userProfile.user_id,
         })
@@ -210,7 +211,7 @@ const UserProfile = () => {
     }
 
     const handleWarn = () => {
-        axios.post('http://localhost:5000/userProfile/warn', {
+        axios.post(`${BASE_URL}/userProfile/warn`, {
             adminID: user.user_id,
             userID: userProfile.user_id,
         })

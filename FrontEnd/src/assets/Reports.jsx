@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import './CSS/profile.css'
 import './CSS/style.css'
+import { BASE_URL } from '../config';
 
 const Reports = ({ report, handleFetchingReports }) => {
     const { user } = useSelector((state) => state.auth);
@@ -15,7 +16,7 @@ const Reports = ({ report, handleFetchingReports }) => {
     useEffect(() => {
 
         if (report.entity_type === 'comment') {
-            axios.get(`http://localhost:5000/notifications/comment-upvote-downvote/${report.entity_id}`)
+            axios.get(`${BASE_URL}/notifications/comment-upvote-downvote/${report.entity_id}`)
                 .then((response) => {
                     setReportComment(response.data)
                 })
@@ -23,7 +24,7 @@ const Reports = ({ report, handleFetchingReports }) => {
                     console.error('Error fetching comment report: ', error);
                 })
         } else if (report.entity_type === 'review') {
-            axios.get(`http://localhost:5000/notifications/review-upvote-downvote/${report.entity_id}`)
+            axios.get(`${BASE_URL}/notifications/review-upvote-downvote/${report.entity_id}`)
                 .then((response) => {
                     setReportReview(response.data)
                 })
@@ -31,7 +32,7 @@ const Reports = ({ report, handleFetchingReports }) => {
                     console.error('Error fetching review report: ', error);
                 })
         } else if (report.entity_type === 'reply') {
-            axios.get(`http://localhost:5000/notifications/reply-upvote-downvote/${report.entity_id}`)
+            axios.get(`${BASE_URL}/notifications/reply-upvote-downvote/${report.entity_id}`)
                 .then((response) => {
                     setReportReply(response.data)
                 })
@@ -43,7 +44,7 @@ const Reports = ({ report, handleFetchingReports }) => {
     }, [report])
 
     const handleReview = () => {
-        axios.post(`http://localhost:5000/report/set-resolved`, {
+        axios.post(`${BASE_URL}/report/set-resolved`, {
             reportID: report.report_id
         })
             .then((response) => {
@@ -55,7 +56,7 @@ const Reports = ({ report, handleFetchingReports }) => {
     }
 
     const handleDelete = () => {
-        axios.post(`http://localhost:5000/report/set-resolved`, {
+        axios.post(`${BASE_URL}/report/set-resolved`, {
             reportID: report.report_id
         })
             .then((response) => {

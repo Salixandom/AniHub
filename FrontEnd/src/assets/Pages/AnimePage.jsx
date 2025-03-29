@@ -15,6 +15,7 @@ import { Navigation, Footer } from './imports'
 import './../CSS/style.css'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { BASE_URL } from '../../config';
 
 
 const AnimePage = () => {
@@ -148,21 +149,21 @@ const AnimePage = () => {
             }
         };
 
-        axios.get(`http://localhost:5000/anime/${animeID}`)
+        axios.get(`${BASE_URL}/anime/${animeID}`)
             .then((response) => {
                 setAnimeData(response.data);
             })
             .catch((error) => {
                 console.error('Error fetching anime data: ', error);
             })
-        axios.get(`http://localhost:5000/anime/${animeID}/keywords`)
+        axios.get(`${BASE_URL}/anime/${animeID}/keywords`)
             .then((response) => {
                 setKeywords(response.data.keywords);
             })
             .catch((error) => {
                 console.error('Error fetching anime keywords: ', error);
             })
-        axios.get(`http://localhost:5000/anime/${animeID}/rank_interaction`)
+        axios.get(`${BASE_URL}/anime/${animeID}/rank_interaction`)
             .then((response) => {
                 setInteractionCount(response.data.interaction_count);
                 setInteractionRank(response.data.interaction_rank);
@@ -170,14 +171,14 @@ const AnimePage = () => {
             .catch((error) => {
                 console.error('Error fetching anime interaction data: ', error);
             })
-        axios.get(`http://localhost:5000/anime/${animeID}/interaction-per-day`)
+        axios.get(`${BASE_URL}/anime/${animeID}/interaction-per-day`)
             .then((response) => {
                 setInteractionPerDate(response.data);
             })
             .catch((error) => {
                 console.error('Error fetching anime interaction per date data: ', error);
             })
-        axios.get(`http://localhost:5000/anime/${animeID}/statusSegment`)
+        axios.get(`${BASE_URL}/anime/${animeID}/statusSegment`)
             .then((response) => {
                 setStatusSegment({
                     planning: response.data.planning,
@@ -191,7 +192,7 @@ const AnimePage = () => {
                 console.error('Error fetching segment data: ', error);
             })
 
-        axios.get(`http://localhost:5000/anime/${animeID}/scoreGraph`)
+        axios.get(`${BASE_URL}/anime/${animeID}/scoreGraph`)
             .then((response) => {
                 setScoreData({
                     rating_1: response.data.rating_1,
@@ -210,7 +211,7 @@ const AnimePage = () => {
                 console.error('Error fetching score graph data: ', error);
             })
 
-        axios.get(`http://localhost:5000/anime/${animeID}/episodes`)
+        axios.get(`${BASE_URL}/anime/${animeID}/episodes`)
             .then((response) => {
                 setEpisodes(response.data);
             })
@@ -221,14 +222,14 @@ const AnimePage = () => {
         handleFetchingForums();
 
         if (user) {
-            axios.get(`http://localhost:5000/user/favorites/check/${user.user_id}/${animeID}`)
+            axios.get(`${BASE_URL}/user/favorites/check/${user.user_id}/${animeID}`)
                 .then((response) => {
                     setIsInFavorites(response.data.isInFavorites);
                 })
                 .catch((error) => {
                     console.error('Error checking favorites: ', error);
                 })
-            axios.get(`http://localhost:5000/user/add_to_list/check/${user.user_id}/${animeID}`)
+            axios.get(`${BASE_URL}/user/add_to_list/check/${user.user_id}/${animeID}`)
                 .then((response) => {
                     if (response.status === 200) {
                         setToList(response.data.status);
@@ -241,7 +242,7 @@ const AnimePage = () => {
                     console.error('Error checking list: ', error);
                 })
 
-            axios.get(`http://localhost:5000/anime/rating/check/${user.user_id}/${animeID}`)
+            axios.get(`${BASE_URL}/anime/rating/check/${user.user_id}/${animeID}`)
                 .then((response) => {
                     if (response.status === 200) {
                         setRating(response.data.rating_score);
@@ -252,7 +253,7 @@ const AnimePage = () => {
                     console.error('Error checking rating: ', error);
                 })
 
-            axios.post(`http://localhost:5000/user_interaction`, {
+            axios.post(`${BASE_URL}/user_interaction`, {
                 userId: user.user_id,
                 animeId: id,
                 status: 'Visited'
@@ -261,7 +262,7 @@ const AnimePage = () => {
                     console.error('Error adding to interaction: ', error);
                 });
 
-            axios.get(`http://localhost:5000/user/anime/review/${id}/${user.user_id}`)
+            axios.get(`${BASE_URL}/user/anime/review/${id}/${user.user_id}`)
                 .then((response) => {
                     setUserReview({
                         bool: response.data.bool,
@@ -277,7 +278,7 @@ const AnimePage = () => {
                 });
         }
 
-        axios.get(`http://localhost:5000/anime/${animeID}/character-voice-actor`)
+        axios.get(`${BASE_URL}/anime/${animeID}/character-voice-actor`)
             .then((response) => {
                 setCharacterVoiceActor(response.data);
                 setCharacterAccordingLanguage(response.data);
@@ -286,28 +287,28 @@ const AnimePage = () => {
                 console.error('Error fetching character voice actors: ', error);
             })
 
-        axios.get(`http://localhost:5000/anime/${animeID}/production`)
+        axios.get(`${BASE_URL}/anime/${animeID}/production`)
             .then((response) => {
                 setProduction(response.data)
             })
             .catch((error) => {
                 console.error('Error fetching production: ', error);
             })
-        axios.get(`http://localhost:5000/anime/${animeID}/trailer`)
+        axios.get(`${BASE_URL}/anime/${animeID}/trailer`)
             .then((response) => {
                 setTrailer(response.data)
             })
             .catch((error) => {
                 console.error('Error fetching trailer: ', error);
             })
-        axios.get(`http://localhost:5000/anime/${animeID}/recommendations`)
+        axios.get(`${BASE_URL}/anime/${animeID}/recommendations`)
             .then((response) => {
                 setRecommendation(response.data)
             })
             .catch((error) => {
                 console.error('Error fetching recommendations: ', error);
             })
-        axios.get(`http://localhost:5000/anime/${animeID}/related`)
+        axios.get(`${BASE_URL}/anime/${animeID}/related`)
             .then((response) => {
                 setRelations(response.data)
             })
@@ -354,7 +355,7 @@ const AnimePage = () => {
             const animeId = animeData.anime_id;
 
             if (isInFavorites) {
-                axios.delete(`http://localhost:5000/user/favorites/${userId}/${animeId}`)
+                axios.delete(`${BASE_URL}/user/favorites/${userId}/${animeId}`)
                     .then(() => {
                         setIsInFavorites(false);
                         toast.success("Removed from favorites successfully")
@@ -364,7 +365,7 @@ const AnimePage = () => {
                         toast.error("Error removing from favorites")
                     });
             } else {
-                axios.post(`http://localhost:5000/user/favorites`, { userId, animeId })
+                axios.post(`${BASE_URL}/user/favorites`, { userId, animeId })
                     .then(() => {
                         setIsInFavorites(true);
                         toast.success("Added to favorites successfully")
@@ -383,7 +384,7 @@ const AnimePage = () => {
     const handleAddToList = (e) => {
         if (user) {
             if (e === 'watching') {
-                axios.post(`http://localhost:5000/user/add_to_list`,
+                axios.post(`${BASE_URL}/user/add_to_list`,
                     { userId: user.user_id, animeId: animeData.anime_id, status: 'Watching' })
                     .then(() => {
                         setToList('Watching');
@@ -395,7 +396,7 @@ const AnimePage = () => {
                     });
             }
             else if (e === 'planning') {
-                axios.post(`http://localhost:5000/user/add_to_list`,
+                axios.post(`${BASE_URL}/user/add_to_list`,
                     { userId: user.user_id, animeId: animeData.anime_id, status: 'Planning' })
                     .then(() => {
                         setToList('Planning');
@@ -407,7 +408,7 @@ const AnimePage = () => {
                     });
             }
             else if (e === 'completed') {
-                axios.post(`http://localhost:5000/user/add_to_list`,
+                axios.post(`${BASE_URL}/user/add_to_list`,
                     { userId: user.user_id, animeId: animeData.anime_id, status: 'Completed' })
                     .then(() => {
                         setToList('Completed');
@@ -419,7 +420,7 @@ const AnimePage = () => {
                     });
             }
             else if (e === 'dropped') {
-                axios.post(`http://localhost:5000/user/add_to_list`,
+                axios.post(`${BASE_URL}/user/add_to_list`,
                     { userId: user.user_id, animeId: animeData.anime_id, status: 'Dropped' })
                     .then(() => {
                         setToList('Dropped');
@@ -431,7 +432,7 @@ const AnimePage = () => {
                     });
             }
             else if (e === 'paused') {
-                axios.post(`http://localhost:5000/user/add_to_list`,
+                axios.post(`${BASE_URL}/user/add_to_list`,
                     { userId: user.user_id, animeId: animeData.anime_id, status: 'Paused' })
                     .then(() => {
                         setToList('Paused');
@@ -450,7 +451,7 @@ const AnimePage = () => {
 
     const handleSaveRating = (r) => {
         if (user) {
-            axios.post(`http://localhost:5000/user/anime/rating`, {
+            axios.post(`${BASE_URL}/user/anime/rating`, {
                 userId: user.user_id,
                 animeId: animeData.anime_id,
                 rating: r
@@ -593,7 +594,7 @@ const AnimePage = () => {
             if (commentText === '') {
                 alert('Comment text can not be empty');
             } else {
-                axios.post(`http://localhost:5000/user/anime/comment`, {
+                axios.post(`${BASE_URL}/user/anime/comment`, {
                     userId: user.user_id,
                     animeId: animeData.anime_id,
                     commentText: commentText,
@@ -623,7 +624,7 @@ const AnimePage = () => {
             if (reviewText === '') {
                 alert('Review text can not be empty')
             } else {
-                axios.post(`http://localhost:5000/user/anime/review`, {
+                axios.post(`${BASE_URL}/user/anime/review`, {
                     userId: user.user_id,
                     animeId: animeData.anime_id,
                     reviewText: reviewText,
@@ -647,7 +648,7 @@ const AnimePage = () => {
 
     const handleFetchingComments = async () => {
         try {
-            const response = await axios.get(`http://localhost:5000/anime/comments/${id}`);
+            const response = await axios.get(`${BASE_URL}/anime/comments/${id}`);
             setComments(response.data);
             checkLoadMore();
         } catch (error) {
@@ -659,11 +660,11 @@ const AnimePage = () => {
     const handleFetchingReviews = async () => {
         try {
             if (user) {
-                const response = await axios.get(`http://localhost:5000/anime/reviews/${id}/${user.user_id}`);
+                const response = await axios.get(`${BASE_URL}/anime/reviews/${id}/${user.user_id}`);
                 setReviews(response.data);
                 checkLoadMore();
             } else {
-                const response = await axios.get(`http://localhost:5000/anime/reviews/${id}/${"0"}`);
+                const response = await axios.get(`${BASE_URL}/anime/reviews/${id}/${"0"}`);
                 setReviews(response.data);
                 checkLoadMoreReviews();
             }
@@ -724,7 +725,7 @@ const AnimePage = () => {
     }
 
     const handleReviewDelete = () => {
-        axios.post(`http://localhost:5000/user/anime/review/delete/${user.user_id}/${userReview.review.anime_id}/${userReview.review.review_id}`)
+        axios.post(`${BASE_URL}/user/anime/review/delete/${user.user_id}/${userReview.review.anime_id}/${userReview.review.review_id}`)
             .then((response) => {
                 setReviewMenuContent(false);
                 toast.success("Review deleted successfully")
@@ -747,7 +748,7 @@ const AnimePage = () => {
 
     const handleReviewUpdate = () => {
         if (updatedReviewText !== userReview.review_text) {
-            axios.post(`http://localhost:5000/user/anime/review/update`, {
+            axios.post(`${BASE_URL}/user/anime/review/update`, {
                 userId: user.user_id,
                 animeId: id,
                 reviewId: userReview.review.review_id,
@@ -786,7 +787,7 @@ const AnimePage = () => {
     }
 
     const handleFetchingForums = () => {
-        axios.get(`http://localhost:5000/anime/forums/${id}`)
+        axios.get(`${BASE_URL}/anime/forums/${id}`)
             .then((response) => {
                 setForums(response.data);
             })
@@ -800,7 +801,7 @@ const AnimePage = () => {
         if (discussionTitle === '' || discussionContent === '') {
             alert('Forum Title or Forum Content can not be empty')
         } else {
-            axios.post(`http://localhost:5000/user/anime/forumPost`, {
+            axios.post(`${BASE_URL}/user/anime/forumPost`, {
                 userId: user.user_id,
                 animeId: animeData.anime_id,
                 title: discussionTitle,

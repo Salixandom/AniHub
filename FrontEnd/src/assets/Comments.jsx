@@ -7,6 +7,7 @@ import Reply from './Reply';
 import './CSS/style.css'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { BASE_URL } from '../config';
 
 const Comments = ({ comment, handleFetchingComments }) => {
     const user = useSelector((state) => state.auth.user);
@@ -68,7 +69,7 @@ const Comments = ({ comment, handleFetchingComments }) => {
         };
 
         if (user) {
-            axios.get(`http://localhost:5000/user/anime/vote-check/${user.user_id}/${comment.anime_id}/${comment.comment_id}`)
+            axios.get(`${BASE_URL}/user/anime/vote-check/${user.user_id}/${comment.anime_id}/${comment.comment_id}`)
                 .then((response) => {
                     if (response.data.vote_type === 'upvote') {
                         setUpvoted(true);
@@ -96,7 +97,7 @@ const Comments = ({ comment, handleFetchingComments }) => {
     const handleUpvote = () => {
         if (user && user.user_id !== comment.user_id) {
             console.log('dhuke');
-            axios.post('http://localhost:5000/user/anime/vote', {
+            axios.post(`${BASE_URL}/user/anime/vote`, {
                 userId: user.user_id,
                 animeId: comment.anime_id,
                 commentId: comment.comment_id,
@@ -125,7 +126,7 @@ const Comments = ({ comment, handleFetchingComments }) => {
 
     const handleDownvote = () => {
         if (user) {
-            axios.post('http://localhost:5000/user/anime/vote', {
+            axios.post(`${BASE_URL}/user/anime/vote`, {
                 userId: user.user_id,
                 animeId: comment.anime_id,
                 commentId: comment.comment_id,
@@ -157,7 +158,7 @@ const Comments = ({ comment, handleFetchingComments }) => {
     }
 
     const handleDelete = () => {
-        axios.post(`http://localhost:5000/user/anime/comment/delete/${user.user_id}/${comment.anime_id}/${comment.comment_id}`)
+        axios.post(`${BASE_URL}/user/anime/comment/delete/${user.user_id}/${comment.anime_id}/${comment.comment_id}`)
             .then((response) => {
                 setCommentMenuContent(false);
                 handleFetchingComments();
@@ -174,7 +175,7 @@ const Comments = ({ comment, handleFetchingComments }) => {
             if (replyText === '') {
 
             } else {
-                axios.post(`http://localhost:5000/user/anime/reply`, {
+                axios.post(`${BASE_URL}/user/anime/reply`, {
                     userId: user.user_id,
                     commentId: comment.comment_id,
                     replyText: replyText,
@@ -198,7 +199,7 @@ const Comments = ({ comment, handleFetchingComments }) => {
 
     const handleFetchingReply = async () => {
         try {
-            const response = await axios.get(`http://localhost:5000/anime/comments/reply/${comment.comment_id}`);
+            const response = await axios.get(`${BASE_URL}/anime/comments/reply/${comment.comment_id}`);
             const tempReply = response.data;
             setReplies(tempReply);
 
@@ -214,7 +215,7 @@ const Comments = ({ comment, handleFetchingComments }) => {
 
     const handleUpdate = () => {
         if (updatedCommentText !== comment.comment_text) {
-            axios.post(`http://localhost:5000/user/anime/comment/update`, {
+            axios.post(`${BASE_URL}/user/anime/comment/update`, {
                 userId: user.user_id,
                 animeId: comment.anime_id,
                 commentId: comment.comment_id,
@@ -238,7 +239,7 @@ const Comments = ({ comment, handleFetchingComments }) => {
     }
 
     const handleReport = () => {
-        axios.post(`http://localhost:5000/user/report`, {
+        axios.post(`${BASE_URL}/user/report`, {
             reported_user_id: comment.user_id,
             reporting_user_id: user.user_id,
             entity_id: comment.comment_id,

@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import './CSS/profile.css'
 import './CSS/style.css'
 import './CSS/insertion.css'
+import { BASE_URL } from '../config';
 
 const UserRequest = ({ request, handleFetchingUserRequest }) => {
     const { user } = useSelector((state) => state.auth);
@@ -57,7 +58,7 @@ const UserRequest = ({ request, handleFetchingUserRequest }) => {
     };
 
     const handleDelete = () => {
-        axios.post('http://localhost:5000/request/delete', {
+        axios.post(`${BASE_URL}/request/delete`, {
             requestID: request.request_id,
         })
             .then((response) => {
@@ -73,7 +74,7 @@ const UserRequest = ({ request, handleFetchingUserRequest }) => {
     const handleAdd = (e) => {
         e.preventDefault();
         console.log(animeFormData)
-        axios.post('http://localhost:5000/anime/add', {
+        axios.post(`${BASE_URL}/anime/add`, {
             animeFormData: animeFormData,
             requestID: request.request_id,
         })
@@ -124,18 +125,18 @@ const UserRequest = ({ request, handleFetchingUserRequest }) => {
                             </div>
                             <div className='insertion-container3'>
                                 <form className='anime-form3'>
-                                    <input type="text" id="title" name="title" placeholder="Title" onChange={handleChange}/>
-                                    <input type="date" id="releaseDate" name="releaseDate" placeholder="Release Date" onChange={handleChange}/>
+                                    <input type="text" id="title" name="title" placeholder="Title" onChange={handleChange} />
+                                    <input type="date" id="releaseDate" name="releaseDate" placeholder="Release Date" onChange={handleChange} />
                                     <textarea id="description" name="description" placeholder="Description" onChange={handleChange}></textarea>
-                                    <input type="url" id="coverImage" name="coverImage" placeholder="Cover Image URL" onChange={handleChange}/>
-                                    <input type="text" id="ongoingStatus" name="ongoingStatus" placeholder="Ongoing Status" onChange={handleChange}/>
-                                    <input type="text" id="runTime" name="runTime" placeholder="Run Time" onChange={handleChange}/>
-                                    <input type="text" id="airingSeason" name="airingSeason" placeholder="Airing Season" onChange={handleChange}/>
-                                    <input type="text" id="source" name="source" placeholder="Source" onChange={handleChange}/>
+                                    <input type="url" id="coverImage" name="coverImage" placeholder="Cover Image URL" onChange={handleChange} />
+                                    <input type="text" id="ongoingStatus" name="ongoingStatus" placeholder="Ongoing Status" onChange={handleChange} />
+                                    <input type="text" id="runTime" name="runTime" placeholder="Run Time" onChange={handleChange} />
+                                    <input type="text" id="airingSeason" name="airingSeason" placeholder="Airing Season" onChange={handleChange} />
+                                    <input type="text" id="source" name="source" placeholder="Source" onChange={handleChange} />
                                     <fieldset id="show-type">
                                         <legend>Show Type</legend>
-                                        <label><input type="checkbox" name="showType" value="TV" onChange={handleChange}/> TV</label>
-                                        <label><input type="checkbox" name="showType" value="OVA" onChange={handleChange}/> OVA</label>
+                                        <label><input type="checkbox" name="showType" value="TV" onChange={handleChange} /> TV</label>
+                                        <label><input type="checkbox" name="showType" value="OVA" onChange={handleChange} /> OVA</label>
                                         <label><input type="checkbox" name="showType" value="Movie" onChange={handleChange} /> Movie</label>
                                         <label><input type="checkbox" name="showType" value="ONA" onChange={handleChange} /> ONA</label>
                                         <label><input type="checkbox" name="showType" value="TV Special" onChange={handleChange} /> TV Special</label>
@@ -154,7 +155,7 @@ const UserRequest = ({ request, handleFetchingUserRequest }) => {
                                         <option value="R - 17+ (violence & profanity)">R - 17+ (violence & profanity)</option>
                                         <option value="R+ - Mild Nudity">R+ - Mild Nudity</option>
                                     </select>
-                                    <input type="url" id="trailer" name="trailer" placeholder="Trailer URL" onChange={handleChange}/>
+                                    <input type="url" id="trailer" name="trailer" placeholder="Trailer URL" onChange={handleChange} />
                                     <fieldset id="genres">
                                         <legend>Genres</legend>
                                         <label><input type="checkbox" name="genres" value="Action" onChange={handleChange} /> Action</label>

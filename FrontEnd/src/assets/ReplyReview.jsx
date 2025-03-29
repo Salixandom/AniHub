@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux"
 import { useParams, Link, useNavigate } from "react-router-dom"
+import { BASE_URL } from '../config';
 
 const ReplyReview = ({ reply, index, handleFetchReply }) => {
     const user = useSelector((state) => state.auth.user)
@@ -13,7 +14,7 @@ const ReplyReview = ({ reply, index, handleFetchReply }) => {
     useEffect(() => {
 
         if (user) {
-            axios.get(`http://localhost:5000/user/forum/reply-vote-check/${user.user_id}/${reply.forum_id}/${reply.reply_id}`)
+            axios.get(`${BASE_URL}/user/forum/reply-vote-check/${user.user_id}/${reply.forum_id}/${reply.reply_id}`)
                 .then((response) => {
                     if (response.data.vote_type === 'upvote') {
                         setUpvoted(true);
@@ -33,7 +34,7 @@ const ReplyReview = ({ reply, index, handleFetchReply }) => {
 
     const handleUpvote = () => {
         if (user && user.user_id !== reply.user_id) {
-            axios.post('http://localhost:5000/user/forum-reply/vote', {
+            axios.post(`${BASE_URL}/user/forum-reply/vote`, {
                 userId: user.user_id,
                 forumId: reply.forum_id,
                 replyId: reply.reply_id,
@@ -66,7 +67,7 @@ const ReplyReview = ({ reply, index, handleFetchReply }) => {
 
     const handleDownvote = () => {
         if (user) {
-            axios.post('http://localhost:5000/user/forum-reply/vote', {
+            axios.post(`${BASE_URL}/user/forum-reply/vote`, {
                 userId: user.user_id,
                 forumId: reply.forum_id,
                 replyId: reply.reply_id,
@@ -117,8 +118,8 @@ const ReplyReview = ({ reply, index, handleFetchReply }) => {
                         <button className='vote-disabled upvote-disabled bg-gray-500 text-gray-600' onClick={handleUpvote} disabled><i class="fas fa-thumbs-up"></i> {reply.upvote}</button>
                         <button className='vote-disabled downvote-disabled  bg-gray-500 text-gray-600' disabled><i class="fas fa-thumbs-down"></i> {reply.downvote}</button>
                     </>) : (<>
-                            <button className={upvoted ? "vote upvote bg-blue-600 text-white" : "vote upvote bg-gray-600 text-gray-300"} onClick={handleUpvote} ><i class="fas fa-thumbs-up"></i> {reply.upvote || '0'}</button>
-                            <button className={downvoted ? "vote downvote bg-red-600 text-white" : "vote downvote  bg-gray-600 text-gray-300"} onClick={handleDownvote}><i class="fas fa-thumbs-down"></i> {reply.downvote || '0'}</button>
+                        <button className={upvoted ? "vote upvote bg-blue-600 text-white" : "vote upvote bg-gray-600 text-gray-300"} onClick={handleUpvote} ><i class="fas fa-thumbs-up"></i> {reply.upvote || '0'}</button>
+                        <button className={downvoted ? "vote downvote bg-red-600 text-white" : "vote downvote  bg-gray-600 text-gray-300"} onClick={handleDownvote}><i class="fas fa-thumbs-down"></i> {reply.downvote || '0'}</button>
                     </>)}
                 </div>
             </div>

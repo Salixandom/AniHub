@@ -5,6 +5,7 @@ import axios from 'axios';
 import Slider from '../AnimeSlider';
 import { Navigation, Footer } from './imports'
 import './../CSS/style.css'
+import { BASE_URL } from '../../config';
 
 const Browse = () => {
 
@@ -13,7 +14,7 @@ const Browse = () => {
     const [allAnimeList, setAllAnimeList] = useState([]);
 
     const handleTrendingAnimeSlides = () => {
-        axios.get('http://localhost:5000/browse/trendingAnime')
+        axios.get(`${BASE_URL}/browse/trendingAnime`)
             .then((response) => {
                 setTrendingAnimeSlides(response.data);
                 console.log(response.data.length)
@@ -24,7 +25,7 @@ const Browse = () => {
     }
 
     const handlePopularAnimeSlides = () => {
-        axios.get('http://localhost:5000/browse/popularAnime')
+        axios.get(`${BASE_URL}/browse/popularAnime`)
             .then((response) => {
                 setPopularAnimeSlides(response.data);
             })
@@ -34,7 +35,7 @@ const Browse = () => {
     }
 
     const handleAllAnimeList = () => {
-        axios.get('http://localhost:5000/browse/allAnime')
+        axios.get(`${BASE_URL}/browse/allAnime`)
             .then((response) => {
                 setAllAnimeList(response.data);
             })
@@ -71,7 +72,7 @@ const Browse = () => {
                     </div>
                 </section>
 
-                <section className="browse-section all-anime rounded-xl" style={{ backgroundColor: "#10161D"}}>
+                <section className="browse-section all-anime rounded-xl" style={{ backgroundColor: "#10161D" }}>
                     <div className="browse-section-header">
                         <h2>ALL ANIME</h2>
                     </div>
@@ -99,8 +100,8 @@ const Browse = () => {
                                         <h3 className='text-gray-300'>{anime.title}</h3>
                                         <div className='anime-info'>
                                             <div className='anime-format'>{anime.showtype}</div>
-                                        <div className='anime-airing'>{anime.airing_season}</div>
-                                        <div className='anime-status'>{anime.ongoing_status ? 'Ongoing' : 'Finished'}</div>
+                                            <div className='anime-airing'>{anime.airing_season}</div>
+                                            <div className='anime-status'>{anime.ongoing_status ? 'Ongoing' : 'Finished'}</div>
                                             <div className='anime-rating'>{anime.average_rating}</div>
                                             <div className='anime-favorites'>{anime.favorites}</div>
                                         </div>

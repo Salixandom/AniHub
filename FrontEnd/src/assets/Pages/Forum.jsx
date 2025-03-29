@@ -5,6 +5,7 @@ import { useParams, Link, useNavigate } from "react-router-dom"
 import { Navigation, Footer } from './imports'
 import ReplyReview from '../ReplyReview'
 import './../CSS/forum.css'
+import { BASE_URL } from '../../config';
 
 const Forum = () => {
     let { forumId } = useParams()
@@ -25,7 +26,7 @@ const Forum = () => {
     }
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/forum/${forumId}`)
+        axios.get(`${BASE_URL}/forum/${forumId}`)
             .then((response) => {
                 setForum(response.data);
             })
@@ -60,7 +61,7 @@ const Forum = () => {
         if (replyContent === '') {
             alert('Reply content can not be empty');
         } else {
-            axios.post(`http://localhost:5000/forum/reply-post`, {
+            axios.post(`${BASE_URL}/forum/reply-post`, {
                 userId: user.user_id,
                 forumId: forumId,
                 replyContent: replyContent,
@@ -77,7 +78,7 @@ const Forum = () => {
     }
 
     const handleFetchReply = () => {
-        axios.get(`http://localhost:5000/forum/fetch-reply/${forumId}`)
+        axios.get(`${BASE_URL}/forum/fetch-reply/${forumId}`)
             .then((response) => {
                 setReplies(response.data);
             })

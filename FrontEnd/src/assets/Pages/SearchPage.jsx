@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useParams, useNavigate, Link, useLocation } from 'react-router-dom'
 import { Navigation, Footer } from './imports'
 import './../CSS/style.css'
+import { BASE_URL } from '../../config';
 
 const SearchPage = () => {
     const location = useLocation();
@@ -36,7 +37,7 @@ const SearchPage = () => {
             }
         };
 
-        axios.get('http://localhost:5000/search/getGenreTypes')
+        axios.get(`${BASE_URL}/search/getGenreTypes`)
             .then((response) => {
                 setGenres(response.data);
             })
@@ -92,7 +93,7 @@ const SearchPage = () => {
             orderBy: selectedSortOption
         }
 
-        axios.get('http://localhost:5000/search/anime/criteria', { params })
+        axios.get(`${BASE_URL}/search/anime/criteria`, { params })
             .then((response) => {
                 console.log(response.data)
                 setResult(response.data)

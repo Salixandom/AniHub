@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import './../CSS/style.css'
+import { BASE_URL } from '../../config';
 
 const Navigation = () => {
     const user = useSelector((state) => state.auth.user);
@@ -27,7 +28,7 @@ const Navigation = () => {
     };
 
     const handleFetchAnime = () => {
-        axios.post('http://localhost:5000/search-box/anime', {
+        axios.post(`${BASE_URL}/search-box/anime`, {
             searchText: searchText,
         })
             .then((response) => {
@@ -60,7 +61,7 @@ const Navigation = () => {
             <nav className="navHeader text-white flex justify-between items-center py-4 px-5">
                 <div className="flex items-center space-x-5 ">
                     <div className="flex items-center space-x-5 text-xs">
-                        <Link to='/'><img src='./../../../public/logo.png' className='h-14 w-28'/></Link>
+                        <Link to='/'><img src='./../../../public/logo.png' className='h-14 w-28' /></Link>
                         <ul className="flex space-x-3 text-sm text-gray-300">
                             <li>
                                 <Link to="/home">Home</Link>
@@ -133,8 +134,8 @@ const Navigation = () => {
                         </>
                     ) : (
                         <div className="space-x-5">
-                            <Link to="/register"><button className=" text-white px-5 py-2 rounded font-bold" style={{background: '#E91E63'}}>Sign Up</button></Link>
-                                <Link to="/login"><button className="border px-5 py-2 rounded font-bold" style={{ borderColor: "#E91E63", color: "#FFF"}}>Login</button></Link>
+                            <Link to="/register"><button className=" text-white px-5 py-2 rounded font-bold" style={{ background: '#E91E63' }}>Sign Up</button></Link>
+                            <Link to="/login"><button className="border px-5 py-2 rounded font-bold" style={{ borderColor: "#E91E63", color: "#FFF" }}>Login</button></Link>
                         </div>
                     )}
                 </div>

@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import './CSS/style.css'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { BASE_URL } from '../config';
 
 const Reply = ({ reply, handleFetchingReply }) => {
     const user = useSelector((state) => state.auth.user);
@@ -61,7 +62,7 @@ const Reply = ({ reply, handleFetchingReply }) => {
         };
 
         if (user) {
-            axios.get(`http://localhost:5000/user/comment/reply-vote-check/${user.user_id}/${reply.comment_id}/${reply.reply_id}`)
+            axios.get(`${BASE_URL}/user/comment/reply-vote-check/${user.user_id}/${reply.comment_id}/${reply.reply_id}`)
                 .then((response) => {
                     if (response.data.vote_type === 'upvote') {
                         setUpvoted(true);
@@ -86,7 +87,7 @@ const Reply = ({ reply, handleFetchingReply }) => {
 
     const handleUpvote = () => {
         if (user && user.user_id !== reply.user_id) {
-            axios.post('http://localhost:5000/user/reply/vote', {
+            axios.post(`${BASE_URL}/user/reply/vote`, {
                 userId: user.user_id,
                 commentId: reply.comment_id,
                 replyId: reply.reply_id,
@@ -117,7 +118,7 @@ const Reply = ({ reply, handleFetchingReply }) => {
 
     const handleDownvote = () => {
         if (user) {
-            axios.post('http://localhost:5000/user/reply/vote', {
+            axios.post(`${BASE_URL}/user/reply/vote`, {
                 userId: user.user_id,
                 commentId: reply.comment_id,
                 replyId: reply.reply_id,
@@ -153,7 +154,7 @@ const Reply = ({ reply, handleFetchingReply }) => {
     }
 
     const handleDelete = () => {
-        axios.post(`http://localhost:5000/user/comment/reply/delete/${user.user_id}/${reply.comment_id}/${reply.reply_id}`)
+        axios.post(`${BASE_URL}/user/comment/reply/delete/${user.user_id}/${reply.comment_id}/${reply.reply_id}`)
             .then((response) => {
                 setReplyMenuContent(false);
                 handleFetchingReply();
@@ -167,7 +168,7 @@ const Reply = ({ reply, handleFetchingReply }) => {
 
     const handleUpdate = () => {
         if (updatedReplyText !== reply.reply_text) {
-            axios.post(`http://localhost:5000/user/anime/reply/update`, {
+            axios.post(`${BASE_URL}/user/anime/reply/update`, {
                 userId: user.user_id,
                 commentId: reply.comment_id,
                 replyId: reply.reply_id,
@@ -191,7 +192,7 @@ const Reply = ({ reply, handleFetchingReply }) => {
     }
 
     const handleReport = () => {
-        axios.post(`http://localhost:5000/user/report`, {
+        axios.post(`${BASE_URL}/user/report`, {
             reported_user_id: reply.user_id,
             reporting_user_id: user.user_id,
             entity_id: reply.reply_id,

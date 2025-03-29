@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Navigation, Footer } from './imports'
 import './../CSS/newlogin.css'
+import { BASE_URL } from '../../config';
 
 const forgotPassword = () => {
     const [email, setEmail] = useState('');
@@ -33,7 +34,7 @@ const forgotPassword = () => {
     const handleSendToken = async () => {
         try {
 
-            const response = await axios.post('http://localhost:5000/login/forgot-password-req', {
+            const response = await axios.post(`${BASE_URL}/login/forgot-password-req`, {
                 email: email,
             })
 
@@ -51,7 +52,7 @@ const forgotPassword = () => {
 
     const handleConfirm = async () => {
         try {
-            const response = await axios.post('http://localhost:5000/login/rest-password', {
+            const response = await axios.post(`${BASE_URL}/login/rest-password`, {
                 username: username,
                 token: token,
                 newPassword: password,

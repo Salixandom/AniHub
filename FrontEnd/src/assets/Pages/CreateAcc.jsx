@@ -5,6 +5,7 @@ import { registerSuccess, registerFailure } from '../Redux/authSlice';
 import axios from 'axios';
 import { Navigation, Footer } from './imports'
 import './../CSS/signup.css'
+import { BASE_URL } from '../../config';
 
 const CreateAcc = () => {
     const dispatch = useDispatch();
@@ -72,7 +73,7 @@ const CreateAcc = () => {
         }
 
         try {
-            const response = await axios.post('http://localhost:5000/register', {
+            const response = await axios.post(`${BASE_URL}/register`, {
                 email,
                 username,
                 first_name: firstName,
@@ -185,7 +186,7 @@ const CreateAcc = () => {
                             value={confirmPassword}
                             onChange={handleInputChange}
                         />
-                        <span 
+                        <span
                             className={`flex mt-3 text-gray-300 toggle-password ${showPassword ? 'visible' : ''}`}
                             onClick={handleTogglePassword}
                         ></span>

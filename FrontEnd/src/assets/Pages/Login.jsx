@@ -7,6 +7,7 @@ import { Navigation, Footer } from './imports'
 import './../CSS/newlogin.css'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { BASE_URL } from '../../config';
 
 const LogIn = () => {
 
@@ -35,7 +36,7 @@ const LogIn = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.post('http://localhost:5000/login', {
+            const response = await axios.post(`${BASE_URL}/login`, {
                 email_username: emailUsername,
                 password: password,
             });
@@ -111,7 +112,7 @@ const LogIn = () => {
                             </div>
                         </div>
                         <div className="form-group flex">
-                            <input type="checkbox" id="robotCheck" className='mr-2'/>
+                            <input type="checkbox" id="robotCheck" className='mr-2' />
                             <label htmlFor="robotCheck" className='translate-y-1.5'>I'm not a robot</label>
                         </div>
                         {err && <div className="error-message">{err}</div>}

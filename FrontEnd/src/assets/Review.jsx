@@ -7,6 +7,7 @@ import Reply from './Reply';
 import './CSS/style.css'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { BASE_URL } from '../config';
 
 const Reviews = ({ review, comingFromUser = "No" }) => {
     const user = useSelector((state) => state.auth.user);
@@ -54,7 +55,7 @@ const Reviews = ({ review, comingFromUser = "No" }) => {
         };
 
         if (user) {
-            axios.get(`http://localhost:5000/user/review/vote-check/${user.user_id}/${review.anime_id}/${review.review_id}`)
+            axios.get(`${BASE_URL}/user/review/vote-check/${user.user_id}/${review.anime_id}/${review.review_id}`)
                 .then((response) => {
                     if (response.data.vote_type === 'upvote') {
                         setUpvoted(true)
@@ -78,7 +79,7 @@ const Reviews = ({ review, comingFromUser = "No" }) => {
 
     const handleUpvote = () => {
         if (user && user.user_id !== review.user_id) {
-            axios.post('http://localhost:5000/user/review/vote', {
+            axios.post(`${BASE_URL}/user/review/vote`, {
                 userId: user.user_id,
                 animeId: review.anime_id,
                 reviewId: review.review_id,
@@ -107,7 +108,7 @@ const Reviews = ({ review, comingFromUser = "No" }) => {
 
     const handleDownvote = () => {
         if (user) {
-            axios.post('http://localhost:5000/user/review/vote', {
+            axios.post(`${BASE_URL}/user/review/vote`, {
                 userId: user.user_id,
                 animeId: review.anime_id,
                 reviewId: review.review_id,
@@ -138,7 +139,7 @@ const Reviews = ({ review, comingFromUser = "No" }) => {
     }
 
     const handleDelete = () => {
-        axios.post(`http://localhost:5000/user/anime/review/delete/${user.user_id}/${review.anime_id}/${review.review_id}`)
+        axios.post(`${BASE_URL}/user/anime/review/delete/${user.user_id}/${review.anime_id}/${review.review_id}`)
             .then((response) => {
                 setReviewMenuContent(false);
                 toast.success("Review deleted successfully")
@@ -150,7 +151,7 @@ const Reviews = ({ review, comingFromUser = "No" }) => {
     }
 
     const handleReport = () => {
-        axios.post(`http://localhost:5000/user/report`, {
+        axios.post(`${BASE_URL}/user/report`, {
             reported_user_id: review.user_id,
             reporting_user_id: user.user_id,
             entity_id: review.review_id,

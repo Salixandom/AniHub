@@ -5,6 +5,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom'
 import { Navigation, Footer } from './imports'
 import { useSelector } from 'react-redux';
 import './../CSS/style.css'
+import { BASE_URL } from '../../config';
 
 const ForumFeed = () => {
     const navigate = useNavigate();
@@ -13,12 +14,12 @@ const ForumFeed = () => {
 
 
     useEffect(() => {
-        axios.get('http://localhost:5000/forums-feed')
+        axios.get(`${BASE_URL}/forums-feed`)
             .then((response) => {
-                 setForums(response.data);
+                setForums(response.data);
             })
             .catch((error) => {
-                 console.error('Error fetching forums: ', error);
+                console.error('Error fetching forums: ', error);
             })
     }, [])
 
@@ -26,7 +27,7 @@ const ForumFeed = () => {
     return (<>
         <Navigation />
         <div className='discussion_body min-h-screen'>
-            <div className='discussion-container' style={{backgroundColor: 'transparent', border: 'none'}}>
+            <div className='discussion-container' style={{ backgroundColor: 'transparent', border: 'none' }}>
                 <div className="comment-section">
                     <div className="flex justify-between">
                         <h2 className='comment-section-title'>Recent Forum Discussion</h2>
