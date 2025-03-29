@@ -18,7 +18,7 @@ const SearchPage = () => {
     const [selectedSortOption, setSelectedSortOption] = useState('Popularity')
     const [sortMenuContent, setSortMenuContent] = useState(false)
     const [rated, setRated] = useState('Any');
-    const [searchText, setSearchText] = useState(location.search.substring(1, location.search.length));
+    const [searchText, setSearchText] = useState(decodeURIComponent(location.search.substring(1)));
 
     const yearsArray = Array.from({ length: 2025 - 1917 + 1 }, (_, index) => (1917 + index).toString());
     const formatsArray = ['TV', 'Movie', 'OVA', 'ONA', 'TV Special', 'Special', 'Music', 'PV', 'CM']
