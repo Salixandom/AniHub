@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 import './../CSS/style.css'
 import { BASE_URL } from '../../config';
+import logo from '../../../public/logo.png'
 
 const Navigation = () => {
     const user = useSelector((state) => state.auth.user);
@@ -61,7 +62,7 @@ const Navigation = () => {
             <nav className="navHeader text-white flex justify-between items-center py-4 px-5">
                 <div className="flex items-center space-x-5 ">
                     <div className="flex items-center space-x-5 text-xs">
-                        <Link to='/'><img src='./../../../public/logo.png' className='h-14 w-28' /></Link>
+                        <Link to='/'><img src={logo} className='h-14 w-28' /></Link>
                         <ul className="flex space-x-3 text-sm text-gray-300">
                             <li>
                                 <Link to="/home">Home</Link>
