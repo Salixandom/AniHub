@@ -29,19 +29,19 @@ AniHub is a full-stack anime discovery and streaming portal inspired by platform
 ## 📸 Screenshots
 
 ### 🏠 Home Page
-![Home Page](https://imgur.com/wqUvKts)
+![Home Page](https://imgur.com/wqUvKts.png)
 
 ### 🎬 Anime Details
-![Anime Details](https://imgur.com/QKb2iCx)
+![Anime Details](https://imgur.com/QKb2iCx.png)
 
 ### 🎯 User Recommendations
-![User Recommendations](https://imgur.com/Mr6jguK)
+![User Recommendations](https://imgur.com/Mr6jguK.png)
 
 ### 📨 Request Anime
-![Request Anime](https://imgur.com/PfyccOF)
+![Request Anime](https://imgur.com/PfyccOF.png)
 
 ### 📊 User Stats Dashboard
-![User Stats](https://imgur.com/LWtWPJJ)
+![User Stats](https://imgur.com/LWtWPJJ.png)
 
 
 ---
