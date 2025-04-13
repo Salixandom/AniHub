@@ -1,6 +1,8 @@
 # AniHub 🌼
 
 🌐 **Live Site:** [AniHub](https://anihubb.netlify.app/)
+> ⚠️ *Please wait 1–5 minutes and refresh the page — the database may take time to wake up after inactivity.*
+
 
 AniHub is a full-stack anime discovery and streaming portal inspired by platforms like MyAnimeList, AniWave, and AniList. It allows users to browse anime, view new and upcoming shows, and receive personalized recommendations. Built using modern web technologies with a clean and responsive UI.
 
