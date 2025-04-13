@@ -1,8 +1,8 @@
-# AniHub 🎌
+# AniHub 🌼
 
 🌐 **Live Site:** [AniHub](https://anihubb.netlify.app/)
 
-AniHub is a full-stack anime discovery and streaming portal inspired by popular platforms like MyAnimeList, AniWave, and AniList. It allows users to browse anime, view new releases, upcoming shows, and get personalized recommendations. Built using modern web technologies with a clean and responsive UI.
+AniHub is a full-stack anime discovery and streaming portal inspired by platforms like MyAnimeList, AniWave, and AniList. It allows users to browse anime, view new and upcoming shows, and receive personalized recommendations. Built using modern web technologies with a clean and responsive UI.
 
 ---
 
@@ -22,15 +22,27 @@ AniHub is a full-stack anime discovery and streaming portal inspired by popular 
 ### Deployment
 - 🔧 Frontend: [Netlify](https://www.netlify.com/)
 - 🌐 Backend: [Render](https://render.com/)
-- 🗃️ Database: [Supabase](https://supabase.io/)
+- 📓 Database: [Supabase](https://supabase.io/)
 
 ---
 
 ## 📸 Screenshots
 
-| Home Page | Anime Details | User Recommendations |
-|-----------|----------------|------------------------|
-| *(Add screenshots here if available)* |
+### 🏠 Home Page
+![Home Page](https://imgur.com/wqUvKts)
+
+### 🎬 Anime Details
+![Anime Details](https://imgur.com/QKb2iCx)
+
+### 🎯 User Recommendations
+![User Recommendations](https://imgur.com/Mr6jguK)
+
+### 📨 Request Anime
+![Request Anime](https://imgur.com/PfyccOF)
+
+### 📊 User Stats Dashboard
+![User Stats](https://imgur.com/LWtWPJJ)
+
 
 ---
 
@@ -38,10 +50,22 @@ AniHub is a full-stack anime discovery and streaming portal inspired by popular 
 
 - 🔍 Browse anime A-Z
 - 🆕 View latest releases and upcoming shows
-- 💡 Personalized anime recommendations (if logged in)
-- 📬 Contact form and request feature
+- 💡 Personalized anime recommendations (based on genre or user preference)
+- 📩 Contact form and anime request feature
 - 🎥 Background video intro with smooth animations
 - 🌐 Responsive UI for all screen sizes
+- 📊 Interactive dashboards with graphs on user activity, ratings, watch status, and genre trends
+- 🤔 Admin/moderator panel with ban/warning/report system and content control
+- 🔒 Secure password system: history restriction, brute-force prevention, strong password enforcement
+- 📧 Password recovery using Nodemailer with temporary login tokens
+- 📅 "Take a Break" mode (hide profile temporarily) and permanent profile deletion
+- 💼 Role-based access: User, Moderator, Admin
+- 🚷 Auto-comment report system triggered by excessive downvotes
+- 🚰 Track anime by watching, dropped, paused, finished, watchlist
+- 🔎 Advanced search by name, genre, year, season, format, censorship
+- ⬆️ Sorting features for better anime discovery
+- 💬 Forum creation and user interaction via replies, comments, upvotes/downvotes
+- 🔍 Visit and interact with other user profiles
 
 ---
 
@@ -70,6 +94,8 @@ DB_PASSWORD=your-db-password
 DB_NAME=your-db-name
 ```
 
+---
+
 ## 🧪 Run Locally
 
 ```bash
@@ -82,20 +108,26 @@ cd ../FrontEnd
 npm run dev
 ```
 
-## 📦 Deployment
+---
 
-Frontend:
-  - Hosted on Netlify
-  - Connected to GitHub for CI/CD
-  - Builds automatically on main branch push
+## 📆 Deployment
 
-Backend:
-  - Hosted on Render
-  - Uses Express.js API connected to Supabase
+**Frontend:**
+- Hosted on Netlify
+- Connected to GitHub for CI/CD
+- Builds automatically on main branch push
+
+**Backend:**
+- Hosted on Render
+- Uses Express.js API connected to Supabase
+
+---
 
 ## 🙋‍♂️ Author
-  - Sakib [Facebook](https://www.facebook.com/sadman.sakib.1911192)  [Github](https://github.com/Salixandom)
-  - Taskeen [Facebook](https://www.facebook.com/taskeen69)  [Github]
+- **Sakib** [Facebook](https://www.facebook.com/sadman.sakib.1911192) | [GitHub](https://github.com/Salixandom)
+- **Taskeen** [Facebook](https://www.facebook.com/taskeen69) | [GitHub](https://github.com/Taskeen15)
+
+---
 
 ## 📄 License
 This project is open-source and free to use.
